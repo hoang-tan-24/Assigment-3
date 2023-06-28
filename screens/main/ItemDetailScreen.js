@@ -35,28 +35,31 @@ export default function ItemDetailScreen({ navigation, route }) {
   }, [navigation]);
 
   const getFromStorage = async () => {
-    const data = await AsyncStorage.getItem("Yêu thích");
-    setFavData(data != null ? JSON.parse(data) : []);
+    const data = await AsyncStorage.getItem("favorite");
+    setFavData(data != null || data != undefined ? JSON.parse(data) : []);
   };
 
   const setDataToStorage = async () => {
     let list;
     if (favData == []) {
       list = [getOrchidId];
-      await AsyncStorage.setItem("Yêu thích", JSON.stringify(list));
+      await AsyncStorage.setItem("favorite", JSON.stringify(list));
     } else {
       list = [...favData, getOrchidId];
-      await AsyncStorage.setItem("Yêu thích", JSON.stringify(list));
+      await AsyncStorage.setItem("favorite", JSON.stringify(list));
     }
     setFavData(list);
   };
 
   const removeDataFromStorage = async () => {
     const list = favData.filter((item) => item !== getOrchidId);
-    await AsyncStorage.setItem("Yêu thích", JSON.stringify(list));
+    await AsyncStorage.setItem("favorite", JSON.stringify(list));
     setFavData(list);
   };
 
+  const removeAllStorage = async () => {
+    await AsyncStorage.clear();
+  };
 
   function animatedButton() {
     Animated.timing(scaleValue, {
@@ -78,6 +81,10 @@ export default function ItemDetailScreen({ navigation, route }) {
     }
   }
 
+  function goBackFunction() {
+    navigation.navigate("Home");
+  }
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={styles.rootContainer}>
@@ -92,7 +99,7 @@ export default function ItemDetailScreen({ navigation, route }) {
             style={styles.backIcon}
             name="chevron-back-outline"
             size={40}
-            onPress={() => navigation.goBack()}
+            onPress={() => goBackFunction()}
           />
         </View>
         <View style={styles.footerContainer}>

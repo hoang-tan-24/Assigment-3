@@ -1,7 +1,9 @@
 import {
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
+  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -31,7 +33,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.rootContainer}>
       <View style={styles.headSection}>
-        <Text style={styles.text2}>Hoa Lan</Text>
+        <Text style={styles.text2}>Phong Lan</Text>
       </View>
       <View style={styles.cat}>
         <Text style={[styles.textTitle, { marginLeft: 15 }]}>Phân loại</Text>

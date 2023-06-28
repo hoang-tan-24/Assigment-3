@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/main/HomeScreen";
 import FavoriteScreen from "./screens/main/FavoriteScreen";
 import ItemDetailScreen from "./screens/main/ItemDetailScreen";
-import Todo from "./screens/todo/Todo";
 import { Ionicons } from "@expo/vector-icons";
 import AppColor from "./consts/colors";
 import CustomDrawer from "./components/CustomDrawer";
@@ -84,7 +83,7 @@ function DrawerNavigators() {
         name="TabHome"
         component={BottomTabNavigators}
         options={{
-          title: "Cửa hàng",
+          title: "Store",
           drawerIcon: ({ color, focused }) => (
             <Ionicons
               name="ios-home-outline"
@@ -95,49 +94,8 @@ function DrawerNavigators() {
           // headerStyle: {
           //   backgroundColor: AppColor.blue,
           // },
-          headerRight: () => {
-            return (
-              <Image
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  marginRight: 20,
-                  marginBottom: 20,
-                }}
-                source={require("./assets/avatar1.jpg")}
-              />
-            );
-          },
         }}
       />
-      {/* <Drawer.Screen
-        name="Todo"
-        component={Todo}
-        options={{
-          title: "Todo",
-          headerTitle: "Todo",
-          drawerIcon: ({ color, focused }) => (
-            <Ionicons
-              name="albums-outline"
-              size={focused ? 35 : 22}
-              color={color}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Drawer.Screen
-        name="FavoriteDrawer"
-        component={FavoriteScreen}
-        options={{          drawerIcon: ({ color, focused }) => (
-            <Ionicons
-              name="albums-outline"
-              size={focused ? 35 : 22}
-              color={color}
-            />
-          ),
-        }}
-      /> */}
     </Drawer.Navigator>
   );
 }
@@ -155,7 +113,13 @@ export default function App() {
             component={DrawerNavigators}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="Detail" component={ItemDetailScreen} />
+          <Stack.Screen
+            name="Detail"
+            component={ItemDetailScreen}
+            options={{
+              gestureEnabled: false,
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

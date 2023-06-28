@@ -53,7 +53,7 @@ export default function CustomDrawer(props) {
                 padding: 5,
               }}
             >
-              Hahino
+              Nguyễn Hoàng Tân
             </Text>
           </View>
         </ImageBackground>

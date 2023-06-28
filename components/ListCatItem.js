@@ -37,16 +37,16 @@ export default function ListCatItem({ data, selectCat, chosenCat }) {
               <Ionicons
                 style={[
                   {
-                    padding: 15,
-                    borderWidth: 2,
+                    padding: 30,
+                    borderWidth: 1,
                     borderColor: "black",
                     borderRadius: 36,
                     overflow: "hidden",
                   },
-                  item.id !== chosenCat ? { borderWidth: 0 } : null,
+                  item.id !== chosenCat ? { borderWidth: 1 } : null,
                 ]}
                 name="home"
-                size={40}
+                size={30}
               />
             </View>
           ) : (
@@ -67,15 +67,7 @@ export default function ListCatItem({ data, selectCat, chosenCat }) {
                 >
                   {item.name}
                 </Text>
-                <Ionicons
-                  name={
-                    item.id === chosenCat
-                      ? "ios-radio-button-on"
-                      : "ios-radio-button-off"
-                  }
-                  size={25}
-                  color={item.id === chosenCat ? "white" : "black"}
-                />
+
               </View>
             </>
           )}

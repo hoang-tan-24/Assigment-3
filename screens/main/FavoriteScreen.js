@@ -1,6 +1,6 @@
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { ORCHIDS } from "../../data/orchids";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListItem from "../../components/ListItem";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -34,12 +34,12 @@ export default function FavoriteScreen() {
   const removeAllStorage = async () => {
     Alert.alert("Bạn có chắc không?", "Bạn muốn xóa tất cả các mục yêu thích của mình?", [
       {
-        text: "No",
+        text: "Không",
         onPress: () => { },
         style: "destructive",
       },
       {
-        text: "Yes",
+        text: "Có",
         onPress: () => {
           AsyncStorage.clear();
           setFavData([]);
@@ -58,7 +58,7 @@ export default function FavoriteScreen() {
   return (
     <ScrollView style={styles.rootContainer}>
       <Text style={{ marginVertical: 30, fontSize: 40, textAlign: "center" }}>
-        Yêu thích
+        Danh sách yêu thích
       </Text>
       {dataFav.length !== 0 ? (
         <>
