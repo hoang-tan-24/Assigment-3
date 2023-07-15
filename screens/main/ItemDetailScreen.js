@@ -57,9 +57,6 @@ export default function ItemDetailScreen({ navigation, route }) {
     setFavData(list);
   };
 
-  const removeAllStorage = async () => {
-    await AsyncStorage.clear();
-  };
 
   function animatedButton() {
     Animated.timing(scaleValue, {

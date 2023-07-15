@@ -32,21 +32,28 @@ export default function FavoriteScreen() {
   };
 
   const removeAllStorage = async () => {
-    Alert.alert("Bạn có chắc không?", "Bạn muốn xóa tất cả các mục yêu thích của mình?", [
-      {
-        text: "Không",
-        onPress: () => { },
-        style: "destructive",
-      },
-      {
-        text: "Có",
-        onPress: () => {
-          AsyncStorage.clear();
-          setFavData([]);
-          dataFav = [];
-        },
-      },
-    ]);
+    if (favData.length === 1) {
+    } else if (favData.length >= 2) {
+      Alert.alert(
+        "Bạn có chắc không?",
+        "Bạn muốn xóa tất cả các mục yêu thích của mình?",
+        [
+          {
+            text: "Không",
+            onPress: () => { },
+            style: "destructive",
+          },
+          {
+            text: "Có",
+            onPress: () => {
+              AsyncStorage.clear();
+              setFavData([]);
+              dataFav = [];
+            },
+          },
+        ]
+      );
+    }
   };
 
   const removeDataFromStorage = async (id) => {
@@ -62,31 +69,24 @@ export default function FavoriteScreen() {
       </Text>
       {dataFav.length !== 0 ? (
         <>
-          <TouchableOpacity
-            style={{ marginLeft: 30 }}
-            onPress={removeAllStorage}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                color: "rgba(0, 0, 0, 0.5)",
-                marginBottom: 10,
-              }}
-            >
-              Xóa tất cả
-            </Text>
-          </TouchableOpacity>
-          <ListItem
-            data={dataFav}
-            removeDataFromStorage={removeDataFromStorage}
-          />
+          {favData.length >= 2 && (
+            <TouchableOpacity style={{ marginLeft: 30 }} onPress={removeAllStorage}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "rgba(0, 0, 0, 0.5)",
+                  marginBottom: 10,
+                }}
+              >
+                Xóa tất cả
+              </Text>
+            </TouchableOpacity>
+          )}
+          <ListItem data={dataFav} removeDataFromStorage={removeDataFromStorage} />
         </>
       ) : (
         <View style={styles.emptyContainer}>
-          <Image
-            style={styles.emptyImage}
-            source={require("../../assets/EmptyBox.png")}
-          />
+          <Image style={styles.emptyImage} source={require("../../assets/EmptyBox.png")} />
           <Text style={styles.emptyText}>Bạn chưa yêu thích hoa lan nào cả :_((((</Text>
         </View>
       )}

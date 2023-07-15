@@ -1,9 +1,8 @@
+import React, { useState } from "react";
 import {
-  FlatList,
   ScrollView,
   StyleSheet,
   Text,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -12,18 +11,17 @@ import { CATEGORIES } from "../../data/categories";
 import ListProduct from "../../components/ListProduct";
 import AppColor from "../../consts/colors";
 import ListCatItem from "../../components/ListCatItem";
-import { useState } from "react";
 
 export default function HomeScreen({ navigation }) {
   const [chosenCat, setChosenCat] = useState("c0");
 
   let data;
-  if (chosenCat == "c0") {
+  if (chosenCat === "c0") {
     data = ORCHIDS.filter((item) => item.rating === 5);
   } else if (!chosenCat) {
     data = ORCHIDS;
   } else if (chosenCat) {
-    data = ORCHIDS.filter((item) => item.categoriId == chosenCat);
+    data = ORCHIDS.filter((item) => item.categoriId === chosenCat);
   }
 
   function selectCat(id) {
@@ -45,7 +43,7 @@ export default function HomeScreen({ navigation }) {
       </View>
       <View style={styles.product}>
         <Text style={styles.textTitle}>
-          {chosenCat == "c0" ? "Phổ biến" : "Sản phẩm"}
+          {chosenCat === "c0" ? "Phổ biến" : "Sản phẩm"}
         </Text>
         {chosenCat === undefined ? (
           <></>
@@ -55,7 +53,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         )}
       </View>
-      <View >
+      <View style={styles.listContainer}>
         <ListProduct data={data} />
       </View>
     </ScrollView>
@@ -65,7 +63,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    // backgroundColor: AppColor.bg,
     backgroundColor: "white",
   },
   headSection: {
@@ -101,5 +98,8 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginBottom: 15,
     color: "rgba(0,0,0,0.5)",
+  },
+  listContainer: {
+    marginTop: 10,
   },
 });

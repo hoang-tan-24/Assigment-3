@@ -141,7 +141,7 @@ export default function ListProduct({ data }) {
       <Image
         style={styles.emptyImage}
         source={require("../assets/EmptyOrchid.png")}
-      />
+      /
       <Text style={styles.emptyText}>Chưa có sản phẩm :_((((</Text>
     </View>
   );
